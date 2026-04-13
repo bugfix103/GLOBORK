@@ -174,16 +174,21 @@ export default function Home() {
       {/* Navigation */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-8">
+          <div className="flex justify-between items-center min-h-[5.5rem] py-2 sm:py-0 sm:h-24">
+            <div className="flex items-center gap-6 md:gap-8 min-w-0">
               <div className="flex-shrink-0 flex items-center">
-                <img src="/logo.png" alt="GLOBORK MANPOWER" className="h-10 w-auto" onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                }} />
-                <div className="hidden flex-shrink-0 flex items-center">
-                  <span className="text-2xl font-bold text-blue-700 tracking-tight">GLOBORK</span>
-                  <span className="text-2xl font-light text-gray-700 tracking-tight">MANPOWER</span>
+                <img
+                  src="/logo.png"
+                  alt="GLOBORK MANPOWER"
+                  className="h-[3.25rem] sm:h-20 md:h-[5.25rem] w-auto max-w-[min(340px,70vw)] sm:max-w-[380px] object-contain object-left"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    (e.currentTarget.nextElementSibling as HTMLElement)?.classList.remove('hidden');
+                  }}
+                />
+                <div className="hidden flex items-center gap-1.5">
+                  <span className="text-2xl sm:text-3xl font-bold text-blue-700 tracking-tight">GLOBORK</span>
+                  <span className="text-2xl sm:text-3xl font-light text-gray-700 tracking-tight">MANPOWER</span>
                 </div>
               </div>
               <nav className="hidden md:flex space-x-8 lg:space-x-10">
@@ -385,15 +390,26 @@ export default function Home() {
       </section>
       
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-blue-700 tracking-tight">GLOBORK</span>
-            <span className="text-xl font-light text-gray-700 tracking-tight">MANPOWER</span>
+      <footer className="bg-white border-t border-gray-200 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center gap-8">
+          <div className="flex flex-col items-center gap-4">
+            <img
+              src="/logo.png"
+              alt="GLOBORK MANPOWER"
+              className="h-16 sm:h-20 md:h-24 w-auto max-w-[min(360px,90vw)] object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                (e.currentTarget.nextElementSibling as HTMLElement)?.classList.remove('hidden');
+              }}
+            />
+            <div className="hidden flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
+              <span className="text-2xl sm:text-3xl font-bold text-blue-700 tracking-tight">GLOBORK</span>
+              <span className="text-2xl sm:text-3xl font-light text-gray-700 tracking-tight">MANPOWER</span>
+            </div>
+            <p className="text-sm text-gray-500 max-w-xl">
+              &copy; {new Date().getFullYear()} GLOBORK MANPOWER. {t.rights}
+            </p>
           </div>
-          <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} GLOBORK MANPOWER. {t.rights}
-          </p>
           <div className="text-xs text-gray-400 font-medium">
             AI-Powered Talent Bridge
           </div>
