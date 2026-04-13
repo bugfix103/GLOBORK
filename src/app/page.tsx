@@ -174,13 +174,13 @@ export default function Home() {
       {/* Navigation */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center min-h-[5.5rem] py-2 sm:py-0 sm:h-24">
+          <div className="flex justify-between items-center min-h-[6rem] py-2 sm:py-0 sm:h-32 md:h-40">
             <div className="flex items-center gap-6 md:gap-8 min-w-0">
               <div className="flex-shrink-0 flex items-center">
                 <img
                   src="/logo.png"
                   alt="GLOBORK MANPOWER"
-                  className="h-[3.25rem] sm:h-20 md:h-[5.25rem] w-auto max-w-[min(340px,70vw)] sm:max-w-[380px] object-contain object-left"
+                  className="h-20 sm:h-28 md:h-36 w-auto max-w-[min(480px,80vw)] sm:max-w-[520px] object-contain object-left"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                     (e.currentTarget.nextElementSibling as HTMLElement)?.classList.remove('hidden');
@@ -396,7 +396,7 @@ export default function Home() {
             <img
               src="/logo.png"
               alt="GLOBORK MANPOWER"
-              className="h-16 sm:h-20 md:h-24 w-auto max-w-[min(360px,90vw)] object-contain"
+              className="h-24 sm:h-32 md:h-40 w-auto max-w-[min(500px,90vw)] object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 (e.currentTarget.nextElementSibling as HTMLElement)?.classList.remove('hidden');
