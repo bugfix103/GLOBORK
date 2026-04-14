@@ -181,7 +181,7 @@ export default function Home() {
             <div className="flex items-center gap-6 md:gap-8 min-w-0">
               <div className="flex-shrink-0 flex items-center">
                 <img
-                  src="/logo.png"
+                  src="/323.png"
                   alt="GLOBORK MANPOWER"
                   className="h-16 sm:h-24 md:h-32 w-auto max-w-[min(480px,75vw)] sm:max-w-[550px] object-contain object-left"
                   onError={(e) => {
@@ -425,7 +425,7 @@ export default function Home() {
             <img
               src="/logo.png"
               alt="GLOBORK MANPOWER"
-              className="h-24 sm:h-32 md:h-40 w-auto max-w-[min(500px,90vw)] object-contain"
+              className="h-32 sm:h-44 md:h-52 w-auto max-w-[min(600px,90vw)] object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 (e.currentTarget.nextElementSibling as HTMLElement)?.classList.remove('hidden');
