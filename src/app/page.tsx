@@ -167,26 +167,29 @@ const languages = [
 
 export default function Home() {
   const [lang, setLang] = useState('en');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  
   const t = useMemo(() => translations[lang as keyof typeof translations], [lang]);
 
   return (
-    <main className="flex-grow flex flex-col">
+    <main className="flex-grow flex flex-col relative">
       {/* Navigation */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center min-h-[6rem] py-2 sm:py-0 sm:h-32 md:h-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="flex justify-between items-center min-h-[5rem] py-2 sm:py-0 sm:h-24 md:h-32">
             <div className="flex items-center gap-6 md:gap-8 min-w-0">
               <div className="flex-shrink-0 flex items-center">
                 <img
                   src="/logo.png"
                   alt="GLOBORK MANPOWER"
-                  className="h-20 sm:h-28 md:h-36 w-auto max-w-[min(480px,80vw)] sm:max-w-[520px] object-contain object-left"
+                  className="h-16 sm:h-24 md:h-32 w-auto max-w-[min(480px,75vw)] sm:max-w-[550px] object-contain object-left"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                     (e.currentTarget.nextElementSibling as HTMLElement)?.classList.remove('hidden');
                   }}
                 />
-                <div className="hidden flex items-center gap-1.5">
+                <div className="hidden items-center gap-1.5">
                   <span className="text-2xl sm:text-3xl font-bold text-blue-700 tracking-tight">GLOBORK</span>
                   <span className="text-2xl sm:text-3xl font-light text-gray-700 tracking-tight">MANPOWER</span>
                 </div>
@@ -199,33 +202,59 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-4 lg:gap-6">
               {/* Language Switcher */}
-              <div className="relative group">
-                <div className="flex items-center gap-1 cursor-pointer text-gray-500 hover:text-gray-800 text-sm font-medium py-2">
+              <div className="relative">
+                <button 
+                  onClick={() => setIsLangMenuOpen(!isLangMenuOpen)} 
+                  onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 200)}
+                  className="flex items-center gap-1 text-gray-500 hover:text-gray-800 text-sm font-medium py-2 focus:outline-none"
+                >
                   <Globe className="w-4 h-4" />
                   <span>{languages.find(l => l.code === lang)?.name}</span>
                   <ChevronDown className="w-4 h-4" />
-                </div>
-                <div className="absolute right-0 mt-0 w-32 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
-                  {languages.map((l) => (
-                    <button 
-                      key={l.code}
-                      onClick={() => setLang(l.code)}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-50 transition ${lang === l.code ? 'bg-blue-50 text-blue-700 font-bold' : 'text-gray-600'}`}
-                    >
-                      {l.name} {l.code === 'hi' ? '(Hindi)' : l.code === 'ru' ? '(Russian)' : ''}
-                    </button>
-                  ))}
-                </div>
+                </button>
+                
+                {isLangMenuOpen && (
+                  <div className="absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded-lg shadow-xl z-50 overflow-hidden">
+                    {languages.map((l) => (
+                      <button 
+                        key={l.code}
+                        onClick={() => {
+                          setLang(l.code);
+                          setIsLangMenuOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-50 transition ${lang === l.code ? 'bg-blue-50 text-blue-700 font-bold' : 'text-gray-600'}`}
+                      >
+                        {l.name} {l.code === 'hi' ? '(Hindi)' : l.code === 'ru' ? '(Russian)' : l.code === 'zh' ? '(Chinese)' : l.code === 'ar' ? '(Arabic)' : l.code === 'vi' ? '(Viet)' : ''}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="hidden sm:flex items-center gap-3">
                 <a href="#" className="text-blue-600 bg-blue-50 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition">{t.login}</a>
                 <a href="#" className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition shadow-sm shadow-blue-200">{t.postJob}</a>
               </div>
               <div className="md:hidden">
-                <Menu className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900 transition" />
+                <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="focus:outline-none">
+                  <Menu className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900 transition" />
+                </button>
               </div>
             </div>
           </div>
+          
+          {/* Mobile Dropdown Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-lg z-50">
+              <div className="px-4 pt-2 pb-4 space-y-1 flex flex-col">
+                <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">{t.findJobs}</a>
+                <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">{t.forEmployers}</a>
+                <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">{t.immigration}</a>
+                <div className="border-t border-gray-200 my-2"></div>
+                <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-blue-700 hover:bg-blue-50">{t.login}</a>
+                <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700 text-center mx-3 mt-2">{t.postJob}</a>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
