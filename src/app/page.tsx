@@ -181,7 +181,7 @@ export default function Home() {
             <div className="flex items-center gap-6 md:gap-8 min-w-0">
               <div className="flex-shrink-0 flex items-center">
                 <img
-                  src="/323.png"
+                  src="/globorka.png"
                   alt="GLOBORK MANPOWER"
                   className="h-16 sm:h-24 md:h-32 w-auto max-w-[min(480px,75vw)] sm:max-w-[550px] object-contain object-left"
                   onError={(e) => {
